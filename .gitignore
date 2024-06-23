@@ -1,0 +1,13 @@
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.db
+*.bin
+*.out
+*.test
+
+/dist/
+/.vscode/
+/.idea/
