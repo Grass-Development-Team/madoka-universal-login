@@ -1,5 +1,3 @@
-$env:GIN_MODE = "release"
-
 Set-Location ..
 
 $platform = @(
