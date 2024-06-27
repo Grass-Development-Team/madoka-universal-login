@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"io"
 	"net/http"
 	"os"
 	"os/signal"
@@ -15,13 +14,7 @@ import (
 )
 
 func main() {
-	// Set Log Writer
-	utils.Log().Writer = io.MultiWriter(os.Stdout)
-
-	// Init Config
-	if !config.Conf().DebugMode {
-		utils.Level = utils.LevelInformation
-	}
+	initialize()
 
 	// Init Router
 	r := routers.InitRouter()
@@ -36,12 +29,23 @@ func main() {
 			utils.Log().Panic("Failed to start server: %s", err)
 		}
 	}()
+	utils.Log().Info("Server started")
 
 	// Process Server Interrupt
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGQUIT)
 	<-quit
 	shutdown(srv)
+}
+
+func initialize() {
+	// Set Log Writer
+	utils.Log().Writer = os.Stdout
+
+	// Init Config
+	if !config.Conf().DebugMode {
+		utils.Level = utils.LevelInformation
+	}
 }
 
 func shutdown(srv *http.Server) {
