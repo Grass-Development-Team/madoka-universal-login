@@ -25,7 +25,7 @@ func api(r *gin.Engine) *gin.RouterGroup {
 	{
 		api.Any("/ping", func(c *gin.Context) {
 			c.JSON(200, &serializer.Response{
-				Code: 200,
+				Code: serializer.CodeOK,
 				Msg:  "OK",
 				Data: "pong",
 			})
