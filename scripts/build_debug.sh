@@ -3,7 +3,7 @@
 export GIN_MODE=debug
 
 cd ..
-go build -o dist/debug/mul-server
+CGO_ENABLE=true go build -o dist/debug/mul-server
 
 cd dist/debug || exit
 ./mul-server

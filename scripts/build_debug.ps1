@@ -1,4 +1,5 @@
 $env:GIN_MODE = "debug"
+$env:CGO_ENABLE = true
 
 Set-Location ..
 
