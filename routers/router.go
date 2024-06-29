@@ -1,6 +1,8 @@
 package routers
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/gin"
 	"projects.gdt.im/yuanzui-cf/madoka-universal-login/internal/config"
 	"projects.gdt.im/yuanzui-cf/madoka-universal-login/internal/serializer"
@@ -24,7 +26,7 @@ func api(r *gin.Engine) *gin.RouterGroup {
 	api := r.Group("/api")
 	{
 		api.Any("/ping", func(c *gin.Context) {
-			c.JSON(200, &serializer.Response{
+			c.JSON(http.StatusOK, &serializer.Response{
 				Code: serializer.CodeOK,
 				Msg:  "OK",
 				Data: "pong",
