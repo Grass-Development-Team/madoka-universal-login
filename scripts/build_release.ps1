@@ -17,6 +17,7 @@ foreach ($p in $platform) {
             $env:GOOS = $p
             $env:GOARCH = $a
             $env:CGO_ENABLE = true
+            Write-Output "Building $p $a"
             go build -o dist/release/mul-$p-$a$($p -eq "windows" ? ".exe" : '')
         }
         catch {
