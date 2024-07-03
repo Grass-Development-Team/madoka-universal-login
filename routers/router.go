@@ -4,6 +4,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"projects.gdt.im/yuanzui-cf/madoka-universal-login/internal/config"
 	"projects.gdt.im/yuanzui-cf/madoka-universal-login/internal/serializer"
+	"projects.gdt.im/yuanzui-cf/madoka-universal-login/internal/utils"
 )
 
 func InitRouter() *gin.Engine {
@@ -14,6 +15,7 @@ func InitRouter() *gin.Engine {
 	}
 
 	r := gin.Default()
+	r.Use(gin.LoggerWithWriter(utils.Log().Writer))
 
 	api(r)
 
