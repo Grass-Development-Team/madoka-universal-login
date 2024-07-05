@@ -41,3 +41,10 @@ func ReadAll(f *os.File) ([]byte, error) {
 		}
 	}
 }
+
+func IsPathExists(path string) bool {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		return false
+	}
+	return true
+}
