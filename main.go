@@ -14,7 +14,13 @@ import (
 )
 
 func main() {
-	initialize()
+	// Set Log Writer
+	utils.Log().Writer = os.Stdout
+
+	// Init Config
+	if !config.Conf().DebugMode {
+		utils.Level = utils.LevelInformation
+	}
 
 	// Init Router
 	r := routers.InitRouter()
@@ -36,16 +42,6 @@ func main() {
 	signal.Notify(quit, os.Interrupt, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGHUP, syscall.SIGQUIT)
 	<-quit
 	shutdown(srv)
-}
-
-func initialize() {
-	// Set Log Writer
-	utils.Log().Writer = os.Stdout
-
-	// Init Config
-	if !config.Conf().DebugMode {
-		utils.Level = utils.LevelInformation
-	}
 }
 
 func shutdown(srv *http.Server) {
